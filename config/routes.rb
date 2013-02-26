@@ -1,1 +1,1 @@
-resources :project_files, only: [:index]
+resources :project_attachments, only: [:index]
