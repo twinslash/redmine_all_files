@@ -15,7 +15,7 @@ module RedmineAllFiles
             LEFT JOIN `documents` d ON d.`id` = a.`container_id` AND a.`container_type` = 'Document'
             LEFT JOIN `issues` i ON i.`id` = a.`container_id` AND a.`container_type` = 'Issue'
             LEFT JOIN `trackers` t ON t.`id` = i.`tracker_id`
-            LEFT JOIN `news` n ON n.`id` = a.`container_id` AND a.`container_type` = 'New'
+            LEFT JOIN `news` n ON n.`id` = a.`container_id` AND a.`container_type` = 'News'
             LEFT JOIN `versions` v ON v.`id` = a.`container_id` AND a.`container_type` = 'Version'
             LEFT JOIN `wiki_pages` w ON w.`id` = a.`container_id` AND a.`container_type` = 'WikiPage'
             LEFT JOIN `wikis` ww ON ww.`id` = w.`wiki_id`
@@ -23,7 +23,6 @@ module RedmineAllFiles
 
             WHERE d.`project_id` = #{id} OR i.`project_id` = #{id} OR n.`project_id` = #{id} OR a.`container_id` = #{id} AND a.`container_type` = 'Project' OR v.`project_id` = #{id} OR ww.`project_id` = #{id}
             ORDER BY a.`created_on`
-            LIMIT 50
           SQL
         end
       end

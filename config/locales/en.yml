@@ -1,5 +1,6 @@
 en:
-  all_files: All files
+  project_module_all_files: All files
+  all_project_files: All project files
   attached: Attached
   to_document: to document
   to_issue: to issue

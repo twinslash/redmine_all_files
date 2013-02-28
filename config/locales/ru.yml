@@ -1,5 +1,6 @@
 ru:
-  all_files: Все файлы
+  project_module_all_files: Все файлы
+  all_project_files: Все файлы проекта
   attached: Прикреплен
   to_document: к документу
   to_issue: к задаче

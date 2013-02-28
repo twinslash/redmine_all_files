@@ -56,8 +56,8 @@ module ProjectAttachmentsHelper
       "#{ t('to_wiki_page') }: " + (link_to "#{ attachment.wiki_page_title }", project_wiki_path(@project, attachment.wiki_page_title))
     when 'Document' then
       "#{ t('to_document') }: " + (link_to "#{ attachment.document_title }", document_path(attachment.container_id))
-    when 'New' then
-      "#{ t('to_new') }: " + (link_to "#{ attachment.new_title }", new_path(attachment.container_id))
+    when 'News' then
+      "#{ t('to_new') }: " + (link_to "#{ attachment.new_title }", news_path(attachment.container_id))
     else
       raise ArgumentError
     end
