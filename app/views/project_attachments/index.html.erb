@@ -1,3 +1,29 @@
-<% @attachments.each do |attachment| %>
-  <%= attachment.id %>
+<%= content_for :header_tags do %>
+  <%= stylesheet_link_tag 'redmine_all_files', plugin: 'redmine_all_files' %>
 <% end %>
+
+<% attachments_per_years = group_by @attachments, ->(attachment) { attachment.created_on.to_datetime.to_date.year }, ->(attachment) { attachment.created_on.to_datetime.to_date } %>
+
+<table class="attachments">
+  <% attachments_per_years.each do |year, attachments_per_year| %>
+    <tr>
+      <td colspan="3" class="year"> <%= year %> </td>
+    </tr>
+    <% attachments_per_year.each do |date, attachments_per_date| %>
+      <tr>
+        <td colspan="3"><hr></td>
+      </tr>
+      <tr>
+        <td rowspan="<%= attachments_per_date.count %>" class="date">
+          <%= ::I18n.l(date, format: :month_day) %>
+        </td>
+        <%= render 'attachment', attachment: attachments_per_date[0] %>
+      </tr>
+      <% attachments_per_date[1..-1].each do |attachment| %>
+        <tr>
+          <%= render 'attachment', attachment: attachment %>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+</table>

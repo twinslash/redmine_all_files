@@ -8,7 +8,7 @@ module RedmineAllFiles
       module ClassMethods
         def attachments_for_project id
           Attachment.find_by_sql <<-SQL
-            SELECT d.`title` AS document_title, i.`subject` AS issue_subject, i.`id` AS issue_id, t.`name` AS issue_tracker_name,
+            SELECT d.`title` AS document_title, i.`subject` AS issue_subject, t.`name` AS issue_tracker_name,
             n.`title` AS new_title, v.`name` AS version_name, w.`title` AS wiki_page_title, a.*
             FROM `attachments` a
 
@@ -32,11 +32,3 @@ module RedmineAllFiles
 end
 
 Attachment.send(:include, RedmineAllFiles::Patches::AttachmentsPatch) if Attachment.included_modules.exclude? RedmineAllFiles::Patches::AttachmentsPatch
-
-# document: Document: document_title => projects/project_id/documents/id
-# issue: Issue:issue_tracker_name issue_id. issue_subject => projects/project_id/issues/id
-# new: New: new_title => projects/project_id/news/id
-# file: File: attachment.filename => project/project_id/file/id
-# version: Version: name => projects/project_id/versions/id
-#wiki_page: Wiki page: title => projects/project_id/wiko_pages/id
-

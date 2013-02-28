@@ -1,2 +1,12 @@
-en:
+ru:
   all_files: Все файлы
+  attached: Прикреплен
+  to_document: к документу
+  to_issue: к задаче
+  to_new: к новости
+  to_version: к версии
+  to_wiki_page: к странице вики
+
+  date:
+    formats:
+      month_day: "%d %B"

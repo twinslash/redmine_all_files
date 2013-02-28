@@ -1,0 +1,40 @@
+.attachments {
+  border-collapse: separate;
+  margin-left: 10px;
+  margin: 10px 10%;
+  width: 80%;
+}
+
+.attachments .year {
+  font-weight: bold;
+  font-family: Verdana, Geneva, Arial, sans-serif;
+  font-size: 1.5em;
+  font-style: italic;
+}
+
+.attachments .date {
+  vertical-align: top;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Arial, sans-serif;
+  font-size: 1.1em;
+  width: 180px;
+}
+
+.attachments .filename {
+  margin: 3px;
+  float: left;
+  margin-right: 3px !important;
+  word-wrap: break-word;
+  font-size: 16px;
+}
+
+.attachments .thumbnail {
+  max-width: 100px;
+  max-height: 100px;
+  float: right;
+}
+
+.attachments .text {
+  vertical-align: top;
+  padding-left: 2px;
+}

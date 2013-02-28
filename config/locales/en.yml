@@ -1,2 +1,12 @@
 en:
   all_files: All files
+  attached: Attached
+  to_document: to document
+  to_issue: to issue
+  to_new: to new
+  to_version: to version
+  to_wiki_page: to wiki page
+
+  date:
+    formats:
+      month_day: "%B %d"
