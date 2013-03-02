@@ -30,4 +30,8 @@
   <% end %>
 </table>
 
+<%= content_for :sidebar do %>
+  <%= render 'search' %>
+<% end %>
+
 <p class="pagination"><%= pagination_links_full @attachments_pages, @attachments_count %></p>

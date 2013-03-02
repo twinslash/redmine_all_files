@@ -1,0 +1,24 @@
+<h3><%= l(:label_search) %></h3>
+<div class="">
+  <%= form_tag({}, :method => :get) do %>
+    <%= hidden_field_tag 'project_id', params[:project_id] %>
+    <%= label_tag "search-input", l(:description_search), :class => "hidden-for-sighted" %>
+    <p>
+      <%= text_field_tag 'q', @question, :size => 30, :id => 'search-input' %>
+      <%= javascript_tag "$('#search-input').focus()" %>
+    </p>
+    <p>
+      <%= hidden_field_tag 'all_words', '', :id => nil %>
+      <label><%= check_box_tag 'all_words', 1, @all_words %> <%= l(:label_all_words) %></label>
+    </p>
+    <p>
+      <%= hidden_field_tag 'titles_only', '', :id => nil %>
+      <label><%= check_box_tag 'titles_only', 1, @titles_only %> <%= l(:label_search_titles_only) %></label>
+    </p>
+    <hr>
+      <% @container_types.each do |t| %>
+        <p><label><%= check_box_tag t, 1, @scope.include?(t) %> <%= type_label(t) %></label></p>
+      <% end %>
+    <p><%= submit_tag l(:button_submit), :name => 'submit' %></p>
+  <% end %>
+</div>

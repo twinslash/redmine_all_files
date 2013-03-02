@@ -2,7 +2,13 @@
   <%= link_to_download attachment, text: image_tag(thumbnail_path_for(attachment, "48px"), class: "thumbnail") %>
 </td>
 <td style="text" class=<%= cycle('odd', 'even') %>>
-  <h3 class="filename"><%= attachment.filename %></h3>
+  <h3 class="filename"><%= highlight_tokens(attachment.filename, @tokens) %></h3>
+  <% unless attachment.description.blank? %>
+    <div class="description" style="clear:left">
+      <b><%= t('field_description') %></b>:
+      <span><%= highlight_tokens(attachment.description, @tokens) %></span>
+    </div>
+  <% end %>
   <div style="clear:left">
     <%= link_to_container_for attachment %>.
     <%= link_to_download attachment, { text: t('button_download') } %>
