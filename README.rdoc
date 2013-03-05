@@ -1,3 +1,0 @@
-= redmine_all_files
-
-Description goes here
