@@ -12,7 +12,7 @@ module RedmineAllFiles
           containers = options[:scope].map { |container| container.singularize.camelize }
 
           token_clauses = tokens.map do |token|
-            "(LOWER(a.`filename`) LIKE %{token} #{ 'OR LOWER(a.`description`) LIKE %{token}' unless options[:titles_only] })" % { token: sanitize("%#{token.downcase}%") }
+            "(LOWER(a.`filename`) LIKE %{token} #{ 'OR LOWER(a.`description`) LIKE %{token}' unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
           end
           statement = token_clauses.join(options[:all_words] ? ' AND ' : ' OR ')
           statement = self.sanitize true if statement.blank?

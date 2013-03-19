@@ -1,5 +1,5 @@
 <td>
-  <%= link_to_download attachment, text: image_tag(thumbnail_path_for(attachment, "48px"), class: "thumbnail") %>
+  <%= link_to_download attachment, :text => image_tag(thumbnail_path_for(attachment, "48px"), :class => "thumbnail") %>
 </td>
 <td style="text" class=<%= cycle('odd', 'even') %>>
   <h3 class="filename"><%= highlight_tokens(attachment.filename, @tokens) %></h3>
@@ -11,6 +11,6 @@
   <% end %>
   <div style="clear:left">
     <%= link_to_container_for attachment %>.
-    <%= link_to_download attachment, { text: t('button_download') } %>
+    <%= link_to_download attachment, { :text => t('button_download') } %>
   </div>
 </td>

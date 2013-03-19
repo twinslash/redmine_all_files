@@ -19,7 +19,7 @@ module ProjectAttachmentsHelper
     groups = Hash.new { |h, k| h[k] = [] }
     if criteria.is_a? Proc
       attachments.each do |attachment|
-        groups[criteria.(attachment)] << attachment
+        groups[criteria.call(attachment)] << attachment
       end
     elsif criteria.is_a?(String) || criteria.is_a?(Symbol)
       attachments.each do |attachment|
@@ -74,7 +74,7 @@ module ProjectAttachmentsHelper
     text = options.delete(:text) || attachment.filename
     link_to(text, { :controller => 'attachments', :action => 'download',
             :id => attachment, :filename => attachment.filename },
-            options.merge({ download: attachment.filename }))
+            options.merge({ :download => attachment.filename }))
   end
 
   # Returns array with extensions which have appropriate icons

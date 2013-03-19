@@ -3,9 +3,10 @@ class ProjectAttachmentsController < ApplicationController
 
   helper SearchHelper
 
-  @@module_names_to_container_types = { issue_tracking: 'issues', news: 'news', documents: 'documents', wiki: 'wiki_pages', files: 'files' }
+  @@module_names_to_container_types = { :issue_tracking => 'issues', :news => 'news', :documents => 'documents', :wiki => 'wiki_pages', :files => 'files' }
 
   def index
+    binding.pry
     @question = params[:q] || ""
     @question.strip!
     @all_words = params[:all_words] ? params[:all_words].present? : true
@@ -31,9 +32,9 @@ class ProjectAttachmentsController < ApplicationController
 
     @all_attachments = Attachment.search_attachments_for_project @project.id,
                                                                  @tokens,
-                                                                 scope: @scope,
-                                                                 all_words: @all_words,
-                                                                 titles_only: @titles_only
+                                                                 :scope => @scope,
+                                                                 :all_words => @all_words,
+                                                                 :titles_only => @titles_only
 
 
     @limit = per_page_option
