@@ -6,7 +6,6 @@ class ProjectAttachmentsController < ApplicationController
   @@module_names_to_container_types = { :issue_tracking => 'issues', :news => 'news', :documents => 'documents', :wiki => 'wiki_pages', :files => 'files' }
 
   def index
-    binding.pry
     @question = params[:q] || ""
     @question.strip!
     @all_words = params[:all_words] ? params[:all_words].present? : true
