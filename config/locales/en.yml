@@ -9,7 +9,7 @@ en:
   to_news: news
   to_version: version
   to_wiki_page: wiki page
-  of_the_project: the project
+  of_the_project: of the project
 
   date:
     formats:
