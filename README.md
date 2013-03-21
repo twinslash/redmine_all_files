@@ -15,13 +15,21 @@ Restart server.
 
 ## Features
 
+* View all files for all projects in one place(v0.0.3).
 * View all project files in one place.
 * Files grouped by update date.
 * The icon for the appropriate file extension.
 * Possibility to jump into the container file.
-* Search by filename or filename and description.
+* Search by filename or filename and description(v0.0.2).
 * The sample files only from said containers(Documents, Issues, Project, Versions, WikiPages, News).
 ![](http://farm9.staticflickr.com/8519/8529759121_377dce6e8e_z.jpg)
+
+## Changelog
+
+* 0.0.3 Added menu item "All files" into top menu(2013-03-21).
+* 0.0.2 Implemented search.
+* 0.0.1 Base functionality(2013-02-28).
+
 
 ## Uninstall
 

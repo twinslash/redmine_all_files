@@ -2,15 +2,16 @@
   <%= stylesheet_link_tag 'redmine_all_files', :plugin => 'redmine_all_files' %>
 <% end %>
 
-<h2><%= t('all_project_files') %></h2>
+<h2><%= params[:project_id] ? t('all_project_files') : t('project_module_all_files')  %></h2>
 
 <% attachments_per_years = group_by @attachments, Proc.new { |attachment| attachment.created_on.to_datetime.to_date.year }, Proc.new { |attachment| attachment.created_on.to_datetime.to_date } %>
-
+<% attachments_per_years = attachments_per_years.sort %> <!-- sort by years -->
 <table class="attachments">
   <% attachments_per_years.each do |year, attachments_per_year| %>
     <tr>
       <td colspan="3" class="year"> <%= year %> </td>
     </tr>
+    <% attachments_per_year = attachments_per_year.sort %> <!-- sort by dates into year -->
     <% attachments_per_year.each do |date, attachments_per_date| %>
       <tr>
         <td colspan="3"><hr></td>

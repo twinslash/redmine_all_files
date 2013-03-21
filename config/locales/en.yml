@@ -4,9 +4,11 @@ en:
   attached: Attached
   to_document: to document
   to_issue: to issue
-  to_new: to new
-  to_version: to version
+  to_project_files: to project files
+  to_news: to news
+  to_version: to  version
   to_wiki_page: to wiki page
+  of_the_project: of the project
 
   date:
     formats:

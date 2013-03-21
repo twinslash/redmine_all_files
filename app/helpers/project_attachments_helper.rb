@@ -47,23 +47,22 @@ module ProjectAttachmentsHelper
   def link_to_container_for(attachment)
     link = case attachment.container_type
     when 'Issue' then
-      "#{ t('to_issue') }: " + (link_to "#{ attachment.issue_tracker_name } #{ attachment.container_id }. #{ attachment.issue_subject }", issue_path(attachment.container_id))
+      "#{t('to_issue')} #{link_to("#{ attachment.issue_tracker_name } #{ attachment.container_id }. #{ attachment.issue_subject }", issue_path(attachment.container_id))}"
     when 'Project' then
-      "#{ t('label_attachment') }: " + (link_to "#{ attachment.filename }", project_files_path(@project))
+      "#{t('to_project_files')}" + (params[:project_id].present? ? " #{link_to(attachment.attachment_project_name, project_files_path(attachment.container_id))}" : '')
     when 'Version' then
-      "#{ t('to_version') }: " + (link_to "#{ attachment.version_name }", version_path(attachment.container_id))
+      "#{t('to_version')} #{link_to(attachment.version_name, version_path(attachment.container_id))}"
     when 'WikiPage' then
-      "#{ t('to_wiki_page') }: " + (link_to "#{ attachment.wiki_page_title }", project_wiki_path(@project, attachment.wiki_page_title))
+      "#{t('to_wiki_page')} #{link_to(attachment.wiki_page_title, project_wiki_path(attachment.wiki_project_id, attachment.wiki_page_title))}"
     when 'Document' then
-      "#{ t('to_document') }: " + (link_to "#{ attachment.document_title }", document_path(attachment.container_id))
+      "#{t('to_document')} #{link_to(attachment.document_title, document_path(attachment.container_id))}"
     when 'News' then
-      "#{ t('to_new') }: " + (link_to "#{ attachment.new_title }", news_path(attachment.container_id))
+      "#{t('to_news')} #{link_to(attachment.new_title, news_path(attachment.container_id))}"
     else
       raise ArgumentError
     end
-
-    "#{ attachment.container_type.eql?('Project') ? '' : t('attached') } #{ link }".html_safe
-
+    project_link = params[:project_id].present? || attachment.container_type.eql?('Project') ? '' : " #{t('of_the_project')} #{link_to attachment.attachment_project_name, project_path(attachment.attachment_project_id)}"
+    "#{t('attached')} #{link}#{project_link}".html_safe
   end
 
   # Generates a link to download an attachment.
