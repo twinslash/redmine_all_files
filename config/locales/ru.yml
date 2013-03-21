@@ -1,13 +1,14 @@
 ru:
   project_module_all_files: Все файлы
-  all_files: Все файлы проекта
-  attached: Прикреплен
-  to_document: к документу
-  to_issue: к задаче
-  to_project_files: к файлам проекта
-  to_news: к новости
-  to_version: к версии
-  to_wiki_page: к странице вики
+  all_project_files: Все файлы проекта
+
+  attached: Прикреплен к
+  to_document: документу
+  to_issue: задаче
+  to_project_files: файлам проекта
+  to_news: новости
+  to_version: версии
+  to_wiki_page: странице вики
   of_the_project: проекта
 
   date:

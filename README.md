@@ -27,7 +27,7 @@ Restart server.
 ## Changelog
 
 * 0.0.3 Added menu item "All files" into top menu(2013-03-21).
-* 0.0.2 Implemented search.
+* 0.0.2 Implemented search(2013-03-02).
 * 0.0.1 Base functionality(2013-02-28).
 
 

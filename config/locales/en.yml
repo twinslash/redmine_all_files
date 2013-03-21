@@ -1,14 +1,15 @@
 en:
   project_module_all_files: All files
   all_project_files: All project files
-  attached: Attached
-  to_document: to document
-  to_issue: to issue
-  to_project_files: to project files
-  to_news: to news
-  to_version: to  version
-  to_wiki_page: to wiki page
-  of_the_project: of the project
+
+  attached: Attached to
+  to_document: document
+  to_issue: issue
+  to_project_files: project files
+  to_news: news
+  to_version: version
+  to_wiki_page: wiki page
+  of_the_project: the project
 
   date:
     formats:

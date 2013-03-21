@@ -49,7 +49,8 @@ module ProjectAttachmentsHelper
     when 'Issue' then
       "#{t('to_issue')} #{link_to("#{ attachment.issue_tracker_name } #{ attachment.container_id }. #{ attachment.issue_subject }", issue_path(attachment.container_id))}"
     when 'Project' then
-      "#{t('to_project_files')}" + (params[:project_id].present? ? " #{link_to(attachment.attachment_project_name, project_files_path(attachment.container_id))}" : '')
+      text = params[:project_id].present? ? t('to_project_files') : attachment.attachment_project_name
+      (params[:project_id].present? ? '' : "#{t('to_project_files')} ") + link_to(text, project_files_path(attachment.container_id))
     when 'Version' then
       "#{t('to_version')} #{link_to(attachment.version_name, version_path(attachment.container_id))}"
     when 'WikiPage' then
