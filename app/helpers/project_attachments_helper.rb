@@ -54,7 +54,7 @@ module ProjectAttachmentsHelper
     when 'Version' then
       "#{t('to_version')} #{link_to(attachment.version_name, version_path(attachment.container_id))}"
     when 'WikiPage' then
-      "#{t('to_wiki_page')} #{link_to(attachment.wiki_page_title, project_wiki_path(attachment.wiki_project_id, attachment.wiki_page_title))}"
+      "#{t('to_wiki_page')} #{link_to(attachment.wiki_page_title, project_wiki_path(attachment.wiki_project_id, Wiki.titleize(attachment.wiki_page_title)))}"
     when 'Document' then
       "#{t('to_document')} #{link_to(attachment.document_title, document_path(attachment.container_id))}"
     when 'News' then
