@@ -35,6 +35,7 @@ class ProjectAttachmentsController < ApplicationController
                                                                       :all_words => @all_words,
                                                                       :titles_only => @titles_only
         @all_attachments.select! {|a| a.visible? }
+        @all_attachments.sort! {|a1, a2| a2.created_on <=> a1.created_on }
       rescue ActiveRecord::RecordNotFound
         render_404
       end
@@ -63,7 +64,7 @@ class ProjectAttachmentsController < ApplicationController
                                                                         :titles_only => @titles_only)
       end
       @all_attachments.select! {|a| a.visible? }
-      @all_attachments.sort! {|a1, a2| a1.created_on <=> a2.created_on }
+      @all_attachments.sort! {|a1, a2| a2.created_on <=> a1.created_on }
     end
     @limit = per_page_option
     @attachments_count = @all_attachments.count
