@@ -1,5 +1,6 @@
 class ProjectAttachmentsController < ApplicationController
   helper SearchHelper
+  before_filter :find_optional_project
   menu_item :all_files
 
   @@module_names_to_container_types = { :issue_tracking => 'issues', :news => 'news', :documents => 'documents', :wiki => 'wiki_pages', :files => 'projects' }
@@ -33,6 +34,7 @@ class ProjectAttachmentsController < ApplicationController
                                                                       :scope => @scope,
                                                                       :all_words => @all_words,
                                                                       :titles_only => @titles_only
+        @all_attachments.select! {|a| a.visible? }
       rescue ActiveRecord::RecordNotFound
         render_404
       end
@@ -60,6 +62,7 @@ class ProjectAttachmentsController < ApplicationController
                                                                         :all_words => @all_words,
                                                                         :titles_only => @titles_only)
       end
+      @all_attachments.select! {|a| a.visible? }
       @all_attachments.sort! {|a1, a2| a1.created_on <=> a2.created_on }
     end
     @limit = per_page_option
