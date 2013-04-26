@@ -1,0 +1,12 @@
+ja:
+  project_module_all_files: すべてのファイル
+  all_project_files: プロジェクトのファイル一覧
+
+  attached: 添付先：
+  to_document: document
+  to_issue: チケット
+  to_project_files: ファイル
+  to_news: ニュース
+  to_version: バージョン
+  to_wiki_page: Wikiページ
+  of_the_project: プロジェクト名：
