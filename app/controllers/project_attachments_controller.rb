@@ -34,7 +34,8 @@ class ProjectAttachmentsController < ApplicationController
                                                                       :scope => @scope,
                                                                       :all_words => @all_words,
                                                                       :titles_only => @titles_only
-        @all_attachments.select! {|a| a.visible? }
+        # use only select (not select!) to have a compatibility with ruby 1.8.7
+        @all_attachments = @all_attachments.select {|a| a.visible? }
         @all_attachments.sort! {|a1, a2| a2.created_on <=> a1.created_on }
       rescue ActiveRecord::RecordNotFound
         render_404
@@ -63,7 +64,8 @@ class ProjectAttachmentsController < ApplicationController
                                                                         :all_words => @all_words,
                                                                         :titles_only => @titles_only)
       end
-      @all_attachments.select! {|a| a.visible? }
+      # use only select (not select!) to have a compatibility with ruby 1.8.7
+      @all_attachments = @all_attachments.select {|a| a.visible? }
       @all_attachments.sort! {|a1, a2| a2.created_on <=> a1.created_on }
     end
     @limit = per_page_option
