@@ -13,11 +13,14 @@ module RedmineAllFiles
 
           containers = options[:scope].map { |container| container.singularize.camelize }
 
-          token_clauses = tokens.map do |token|
-            "(LOWER(a.filename) LIKE %{token} #{ 'OR LOWER(a.description) LIKE %{token}' unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+          statement = '1=1'
+          if tokens.any?
+            token_clauses = tokens.map do |token|
+              "(LOWER(a.filename) LIKE %{token} #{ 'OR LOWER(a.description) LIKE %{token}' unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+            end
+            statement = token_clauses.join(options[:all_words] ? ' AND ' : ' OR ')
+            statement = self.sanitize true if statement.blank?
           end
-          statement = token_clauses.join(options[:all_words] ? ' AND ' : ' OR ')
-          statement = self.sanitize true if statement.blank?
 
           find_by_sql <<-SQL
             SELECT d.title AS document_title, i.subject AS issue_subject, t.name AS issue_tracker_name,
