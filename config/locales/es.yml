@@ -1,0 +1,16 @@
+es:
+  project_module_all_files: Todos los archivos
+  all_project_files: Todos los archivos del proyecto
+
+  attached: Adjunto a 
+  to_document: documento
+  to_issue: petición
+  to_project_files: archivos del proyecto
+  to_news: noticias
+  to_version: versión
+  to_wiki_page: página del wiki
+  of_the_project: del proyecto
+
+  date:
+    formats:
+      month_day: "%d de %B"
