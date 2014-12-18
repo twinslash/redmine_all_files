@@ -63,7 +63,7 @@ module ProjectAttachmentsHelper
     else
       raise ArgumentError
     end
-    project_link = params[:project_id].present? || attachment.container_type.eql?('Project') ? '' : " #{t('of_the_project')} #{link_to attachment.attachment_project_name, project_path(attachment.attachment_project_id)}"
+    project_link = params[:project_id].present? || attachment.container_type.eql?('Project') ? '' : " #{t('of_the_project')} #{link_to attachment.project.to_s, project_path(attachment.attachment_project_id)}"
     "#{t('attached')} #{link}#{project_link}".html_safe
   end
 
