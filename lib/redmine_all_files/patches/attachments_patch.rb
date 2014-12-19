@@ -22,8 +22,9 @@ module RedmineAllFiles
                 case val
                   when 'i' then str += " OR (LOWER(#{val}.subject) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
                   when 'n', 'd' then str += " OR (LOWER(#{val}.title) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
-                  when 'p','v' then str += " OR (LOWER(#{val}.name) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+                  when 'p' then str += " OR (LOWER(#{val}.name) LIKE %{token} OR LOWER(#{val}.identifier) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
                   when 'w' then str += " OR (LOWER(#{val}.title) LIKE %{token})" % { :token => sanitize("%#{token.downcase}%") }
+                  when 'v' then str += " OR (LOWER(#{val}.name) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
                   else
                 end
 
@@ -36,7 +37,7 @@ module RedmineAllFiles
             statement = self.sanitize true if statement.blank?
           end
 
-          
+
           find_by_sql <<-SQL
             SELECT d.title AS document_title, i.subject AS issue_subject, t.name AS issue_tracker_name,
                    n.title AS new_title, v.name AS version_name, w.title AS wiki_page_title, ww.project_id AS wiki_project_id,
