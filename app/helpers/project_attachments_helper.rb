@@ -92,7 +92,7 @@ module ProjectAttachmentsHelper
   # If attachment is a image returns path to it
   def thumbnail_path_for(attachment, icon_size="512px")
     if attachment.image?
-      "/attachments/download/#{ attachment.id }/#{ attachment.filename }"
+      "/attachments/thumbnail/#{ attachment.id }/#{icon_size.sub("px",'')}"
     elsif (icon = attachment.filename.match(/([^\.]+)$/)[1]).in? available_icons
       File.join('/plugin_assets', 'redmine_all_files', 'images', 'Free-file-icons', icon_size, "#{ icon }.png")
     else
