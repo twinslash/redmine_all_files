@@ -75,7 +75,8 @@ module ProjectAttachmentsHelper
     text = options.delete(:text) || attachment.filename
     link_to(text, { :controller => 'attachments', :action => 'download',
             :id => attachment, :filename => attachment.filename },
-            options.merge({ :download => attachment.filename }))
+            options.merge({ :target => '_blank' }))
+            #options.merge({ :download => attachment.filename, :target => '_blank' }))
   end
 
   # Returns array with extensions which have appropriate icons
