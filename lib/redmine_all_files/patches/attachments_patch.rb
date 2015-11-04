@@ -16,11 +16,27 @@ module RedmineAllFiles
           statement = '1=1'
           if tokens.any?
             token_clauses = tokens.map do |token|
-              "(LOWER(a.filename) LIKE %{token} #{ 'OR LOWER(a.description) LIKE %{token}' unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+              str = "((LOWER(a.filename) LIKE %{token} #{ 'OR LOWER(a.description) LIKE %{token}' unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+              options[:scope].each do |option|
+                val = option[0]
+                case val
+                  when 'i' then str += " OR (LOWER(#{val}.subject) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+                  when 'n', 'd' then str += " OR (LOWER(#{val}.title) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+                  when 'p' then str += " OR (LOWER(#{val}.name) LIKE %{token} OR LOWER(#{val}.identifier) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+                  when 'w' then str += " OR (LOWER(#{val}.title) LIKE %{token})" % { :token => sanitize("%#{token.downcase}%") }
+                  when 'v' then str += " OR (LOWER(#{val}.name) LIKE %{token} #{ "OR LOWER(#{val}.description) LIKE %{token}" unless options[:titles_only] })" % { :token => sanitize("%#{token.downcase}%") }
+                  else
+                end
+
+              end
+              str += ')'
+              str
+
             end
             statement = token_clauses.join(options[:all_words] ? ' AND ' : ' OR ')
             statement = self.sanitize true if statement.blank?
           end
+
 
           find_by_sql <<-SQL
             SELECT d.title AS document_title, i.subject AS issue_subject, t.name AS issue_tracker_name,
@@ -47,6 +63,7 @@ module RedmineAllFiles
                   ) AND a.container_type IN (#{ containers.map { |c| self.sanitize(c) }.join(', ') })
             ORDER BY a.created_on
           SQL
+
         end
       end
     end

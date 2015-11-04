@@ -49,7 +49,7 @@ module ProjectAttachmentsHelper
     when 'Issue' then
       "#{t('to_issue')} #{link_to("#{ attachment.issue_tracker_name } #{ attachment.container_id }. #{ attachment.issue_subject }", issue_path(attachment.container_id))}"
     when 'Project' then
-      text = params[:project_id].present? ? t('to_project_files') : attachment.attachment_project_name
+      text = params[:project_id].present? ? t('to_project_files') : attachment.project.to_s
       (params[:project_id].present? ? '' : "#{t('to_project_files')} ") + link_to(text, project_files_path(attachment.container_id))
     when 'Version' then
       "#{t('to_version')} #{link_to(attachment.version_name, version_path(attachment.container_id))}"
@@ -63,7 +63,7 @@ module ProjectAttachmentsHelper
     else
       raise ArgumentError
     end
-    project_link = params[:project_id].present? || attachment.container_type.eql?('Project') ? '' : " #{t('of_the_project')} #{link_to attachment.attachment_project_name, project_path(attachment.attachment_project_id)}"
+    project_link = params[:project_id].present? || attachment.container_type.eql?('Project') ? '' : " #{t('of_the_project')} #{link_to attachment.project.to_s, project_path(attachment.attachment_project_id)}"
     "#{t('attached')} #{link}#{project_link}".html_safe
   end
 
@@ -75,7 +75,8 @@ module ProjectAttachmentsHelper
     text = options.delete(:text) || attachment.filename
     link_to(text, { :controller => 'attachments', :action => 'download',
             :id => attachment, :filename => attachment.filename },
-            options.merge({ :download => attachment.filename }))
+            options.merge({ :target => '_blank' }))
+            #options.merge({ :download => attachment.filename, :target => '_blank' }))
   end
 
   # Returns array with extensions which have appropriate icons
@@ -91,7 +92,7 @@ module ProjectAttachmentsHelper
   # If attachment is a image returns path to it
   def thumbnail_path_for(attachment, icon_size="512px")
     if attachment.image?
-      "/attachments/download/#{ attachment.id }/#{ attachment.filename }"
+      "/attachments/thumbnail/#{ attachment.id }/#{icon_size.sub("px",'')}"
     elsif (icon = attachment.filename.match(/([^\.]+)$/)[1]).in? available_icons
       File.join('/plugin_assets', 'redmine_all_files', 'images', 'Free-file-icons', icon_size, "#{ icon }.png")
     else
